@@ -1,0 +1,57 @@
+.news {
+  display: flex;
+  flex-direction: row;
+  padding: 25px 0 25px 0;
+  &__icon {
+    margin-right: 20px;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    font-size: 18px;
+    font-family: "Lato";
+    color: rgb(29, 31, 36);
+    line-height: 1.567;
+  }
+  &__info {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    font-family: "Lato";
+    color: rgba(29, 31, 36, 0.4);
+    line-height: 1.857;
+
+    .info__from {}
+    .info__date {}
+  }
+  &__text {
+    font-size: 14px;
+    font-family: "Lato";
+    color: rgba(29, 31, 36, 0.698);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  &__social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    color: rgba(29, 31, 36, 0.698);
+    font-size: 14px;
+  }
+  &__likes {
+    display: flex;
+    margin-right: 15px;
+    .likes__icon {
+      margin-right: 4px;
+    }
+  }
+  &__comments {
+    //display: flex;
+    .comments__icon {
+      margin-right: 4px;
+    }
+  }
+}
