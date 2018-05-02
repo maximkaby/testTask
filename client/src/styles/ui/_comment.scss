@@ -1,0 +1,39 @@
+.comment {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__message {
+    font-size: 16px;
+  }
+
+  &__user {
+
+  }
+
+  &__msggroup {
+
+  }
+
+  &__icon {
+    margin-right: 10px;
+  }
+
+  &__manage {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  &__delete {
+    cursor: pointer;
+  }
+  &__edit {
+    cursor: pointer;
+  }
+
+}

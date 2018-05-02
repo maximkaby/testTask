@@ -1,53 +1,50 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import ExpansionPanel, {
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
-} from 'material-ui/ExpansionPanel';
-import Typography from 'material-ui/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import { MenuItem } from 'material-ui/Menu';
+import { ListItemText } from 'material-ui/List';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchTasks, setCurProjectId } from 'actions';
+import SearchDeveloper from '../SearchDeveloper';
 
 const styles = theme => ({
-  root: {
-    width: '100%',
+  menuItem: {
+    '&:focus': {
+      // backgroundColor: theme.palette.primary.main,
+      '& $primary, & $icon': {
+        color: theme.palette.common.white,
+      },
+    },
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
+  primary: {},
+  icon: {},
 });
+
 
 class ProjectItem extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, fetchTasks, setCurProjectId, data, match } = this.props;
+    console.log(this.props, 'project');
     return (
-      <div className="project">
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Expansion Panel 1</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-              sit amet blandit leo lobortis eget.
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Expansion Panel 2</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-              sit amet blandit leo lobortis eget.
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      </div>
+      <MenuItem
+        onClick={() => {
+          console.log('MenuItem')
+          setCurProjectId(data.id)
+          fetchTasks(data.id)
+        }}
+        className={`${classes.menuItem} project`}
+      >
+        <Link to={`${match.url}`}>{data.title}</Link>
+        <SearchDeveloper projectId={data.id} />
+      </MenuItem>
     );
   }
 }
 
-export default withStyles(styles)(ProjectItem);
+const mapStateToProps = (state) => {
+  return {};
+}
+
+export default connect(mapStateToProps, { setCurProjectId, fetchTasks })(
+  withStyles(styles)(ProjectItem)
+);

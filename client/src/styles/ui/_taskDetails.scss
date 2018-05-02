@@ -1,0 +1,21 @@
+.taskDetails {
+  padding: 10px;
+
+  &__description {
+    color: #6c757d;
+  }
+
+  &__descr {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__comments {
+
+  }
+
+  &__headComments {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}

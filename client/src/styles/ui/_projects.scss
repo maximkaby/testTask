@@ -1,6 +1,13 @@
 .projects {
 
+
   &__title {
     padding: 5px;
   }
+
+  & .project{
+    display: flex;
+    justify-content: space-between;
+  }
 }
+

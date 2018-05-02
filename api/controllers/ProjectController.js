@@ -1,15 +1,16 @@
 const Project = require('../models/project');
 const Task = require('../models/task');
+const Op = require('sequelize').Op;
 
 class ProjectController {
 
   static addProject(req, res) {
     Project.create({
       title: req.body.title,
-      description: req.body.description,
+      description: req.body.description || '',
       user_id: req.user.dataValues.id
     }).then(project => {
-      res.send(req.user);
+      res.send(project);
     }).catch(err => {
       res.send('error');
     });
@@ -18,6 +19,7 @@ class ProjectController {
   }
 
   static getUserProjects(req, res) {
+    console.log(req.headers, 'user data');
     Project.findAll({
       where: {
         user_id: req.user.dataValues.id
@@ -32,7 +34,8 @@ class ProjectController {
   static getTasksProject(req, res) {
     Task.findAll({
       where: {
-        project_id: req.body.project_id
+        project_id: req.body.projectId,
+        // user_id
       }
     }).then(tasks => {
       res.send(tasks)
@@ -61,6 +64,21 @@ class ProjectController {
     }).catch(err => {
       res.send('error');
     })
+  }
+
+  static getDevProjects(req, res) {
+    console.log(req.user.dataValues.id);
+    Project.findAll({
+      where: {
+        developers_id: {
+          [Op.like]: '%,' + String(req.user.dataValues.id) + ',%',
+          [Op.like]: '%[' + String(req.user.dataValues.id) + ']%',
+          [Op.like]: '%,' + String(req.user.dataValues.id) + ']%'
+        }
+      }
+    }).then(projects => {
+      res.send(projects);
+    }).error(err => res.send(err));
   }
 }
 

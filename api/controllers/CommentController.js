@@ -37,6 +37,20 @@ class CommentController {
       })
   }
 
+  static getComments(req, res) {
+    Comment.findAll({
+      where: {
+        task_id: Number(req.body.task_id),
+        user_id: req.user.dataValues.id
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    }).then(comments => {
+      res.send(comments);
+    }).then(err => {
+      res.send('error');
+    })
+  }
+
 
 }
 

@@ -7,11 +7,13 @@ let User = require('./models/User');
 
 passport.use(new Strategy(
   function(token, cb) {
+    console.log(token, 'token');
     User.findOne({
       where: {
         token: token
       }
     }).then(user => {
+      console.log(user);
       return cb(null, user);
     });
     //   .findByToken(token, function(err, user) {
@@ -22,6 +24,12 @@ passport.use(new Strategy(
   }));
 
 let app = express();
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

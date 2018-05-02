@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
+import { connect } from 'react-redux';
 
-export default class Avatar extends Component {
+class Avatar extends Component {
   render() {
+    let { user } = this.props;
     return (
       <Paper>
         <div className="avatar">
@@ -10,10 +12,16 @@ export default class Avatar extends Component {
             <img className="avatar__img" src='http://unidadeducativa.org/wp-content/uploads/2014/12/v-01.png' alt=""/>
           </div>
           <div className="avatar_email">
-            myemail
+            {user.email}
           </div>
         </div>
       </Paper>
     );
   }
 }
+
+const mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+export default connect(mapStateToProps)(Avatar);

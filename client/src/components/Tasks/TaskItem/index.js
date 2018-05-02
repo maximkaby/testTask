@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
+import { MenuItem } from 'material-ui/Menu';
+import { Route, withRouter, Link } from 'react-router-dom';
 
-export default class TaskItem extends Component {
+class TaskItem extends Component {
   render() {
+    const { data, match } = this.props;
+    console.log(this.props, 'task item');
     return (
-      <div className="task">
-
-      </div>
+      <MenuItem className="task">
+        <div className="task__title">
+          <Link to={`${match.url}/${data.id}`}>
+            {data.title}
+          </Link>
+        </div>
+      </MenuItem>
     );
   }
 }
+
+export default withRouter(TaskItem);

@@ -23,6 +23,9 @@ const Task = db.define('tasks', {
       notEmpty: true
     }
   },
+  developer_id: {
+    type: Sequelize.INTEGER,
+  },
   status: {
     type: Sequelize.INTEGER,
     validate: {

@@ -11,6 +11,7 @@
     "mongoose": "^5.0.15",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.3",
+    "nodemailer": "^4.6.4",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "sequelize": "^4.37.6"

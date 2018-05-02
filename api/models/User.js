@@ -4,6 +4,7 @@ const Project = require('./project');
 
 const User = db.define('users', {
   name: Sequelize.STRING(255),
+  surname: Sequelize.STRING(255),
   email: {
     type: Sequelize.STRING(156),
     unique: true

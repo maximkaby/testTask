@@ -8,14 +8,15 @@ const ProjectController = require('../controllers/ProjectController');
 const TaskController = require('../controllers/TaskController');
 const CommentController = require('../controllers/CommentController');
 
-router.post('/test', UserController.test);
-router.post('/testlol', LolController.test);
-router.post('/register', UserController.register)
+router.post('/register', UserController.register);
+router.post('/login', UserController.login);
 
 router.get('/user',
   passport.authenticate('bearer', { session: false }),
   function(req, res) {
-    res.json(req.user);
+    const { id, name, email, role, confirmed } = req.user;
+    const user = {id, name, email, role, confirmed: Boolean(Number(confirmed)), isAuth: true};
+    res.json(user);
   })
 
 router.post('/addProject',
@@ -28,6 +29,11 @@ router.post('/getUserProjects',
   ProjectController.getUserProjects
 );
 
+router.post('/getDevProjects',
+  passport.authenticate('bearer', { session: false }),
+  ProjectController.getDevProjects
+);
+
 router.post('/addTask',
   passport.authenticate('bearer', { session: false }),
   TaskController.addTask
@@ -36,6 +42,11 @@ router.post('/addTask',
 router.post('/setStatusTask',
   passport.authenticate('bearer', { session: false }),
   TaskController.setStatusTask
+);
+
+router.post('/setDeveloperTask',
+  passport.authenticate('bearer', { session: false }),
+  TaskController.setDeveloperTask
 );
 
 router.post('/getTasksProject',
@@ -66,6 +77,21 @@ router.post('/deleteComment',
 router.post('/updateComment',
   passport.authenticate('bearer', { session: false }),
   CommentController.updateComment
+);
+
+router.post('/getComments',
+  passport.authenticate('bearer', { session: false }),
+  CommentController.getComments
+);
+
+// router.post('/sendMail',
+//   // passport.authenticate('bearer', { session: false }),
+//   UserController.sendMail
+// );
+
+router.get('/confirmEmail',
+  // passport.authenticate('bearer', { session: false }),
+  UserController.confirmEmail
 );
 
 
